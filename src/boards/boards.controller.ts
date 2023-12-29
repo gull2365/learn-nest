@@ -1,13 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './board.model';
 
 @Controller('boards')
 export class BoardsController {
-  constructor(private BoardsService: BoardsService) {}
+  constructor(private boardsService: BoardsService) {}
 
   @Get()
   getAllBoard(): Board[] {
-    return this.BoardsService.getAllBoards();
+    return this.boardsService.getAllBoards();
+  }
+
+  @Post()
+  createBoard(
+    @Body('title') title: string,
+    @Body('description') description: string,
+  ): Board {
+    return this.boardsService.createBoard(title, description);
   }
 }
