@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BadRequestException, PipeTransform } from '@nestjs/common';
 import { BoardStatus } from '../board.model';
 
