@@ -9,7 +9,7 @@ import { Board } from './board.entity';
 @Injectable()
 export class BoardsService {
   constructor(
-    @InjectRepository(BoardRepository)
+    @InjectRepository(Board)
     private boardRepository: BoardRepository,
   ) {}
   // getAllBoards(): Board[] {
@@ -26,8 +26,13 @@ export class BoardsService {
   //   this.boards.push(board);
   //   return board;
   // }
+
+  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
+  }
+
   async getBoardById(id: number): Promise<Board> {
-    const found = await this.boardRepository.findOne(id);
+    const found = await this.boardRepository.findOne({ where: { id } });
 
     if (!found) {
       throw new NotFoundException(`Can't find Board with id ${id}`);
