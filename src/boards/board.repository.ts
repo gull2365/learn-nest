@@ -1,11 +1,15 @@
 /* eslint-disable */
-import { EntityRepository, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Board } from './board.entity';
 import { BoardStatus } from './board-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Board)
+@Injectable()
 export class BoardRepository extends Repository<Board> {
+  constructor(dataSource: DataSource) {
+    super(Board, dataSource.createEntityManager());
+  }
   async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
     const { title, description } = createBoardDto;
 

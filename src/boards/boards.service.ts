@@ -8,12 +8,11 @@ import { Board } from './board.entity';
 @Injectable()
 export class BoardsService {
   constructor(
-    @InjectRepository(Board)
+    @InjectRepository(BoardRepository)
     private boardRepository: BoardRepository,
   ) {}
 
   createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
-    console.log(this.boardRepository);
     return this.boardRepository.createBoard(createBoardDto);
   }
 
