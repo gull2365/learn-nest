@@ -20,6 +20,11 @@ import { BoardStatus } from './board-status.enum';
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
+  @Get()
+  getALlBoard(): Promise<Board[]> {
+    return this.boardsService.getAllBoards();
+  }
+
   @Post()
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
